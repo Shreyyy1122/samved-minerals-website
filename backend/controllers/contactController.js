@@ -6,12 +6,13 @@ export const sendContact = async (req, res) => {
 
    const transporter = nodemailer.createTransport({
   host: "smtp.titan.email",
-  port: 465,
-  secure: true,
+  port: 587,
+  secure: false,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
+  requireTLS: true,
 });
 await transporter.verify();
 console.log("SMTP connection established");
