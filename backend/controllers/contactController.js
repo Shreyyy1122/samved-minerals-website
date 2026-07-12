@@ -5,9 +5,9 @@ export const sendContact = async (req, res) => {
     const { name, email, phone, company, message } = req.body;
 
    const transporter = nodemailer.createTransport({
-  host: "smtp.office365.com",
-  port: 587,
-  secure: false,
+  host: "smtp.titan.email",
+  port: 465,
+  secure: true,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
