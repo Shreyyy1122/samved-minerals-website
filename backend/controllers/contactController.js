@@ -13,6 +13,9 @@ export const sendContact = async (req, res) => {
     pass: process.env.EMAIL_PASS,
   },
 });
+
+await transporter.verify();
+console.log("SMTP connection established");
     // Send inquiry to company emails
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
