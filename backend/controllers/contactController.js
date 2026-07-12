@@ -5,16 +5,15 @@ export const sendContact = async (req, res) => {
     const { name, email, phone, company, message } = req.body;
 
    const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false,
+  requireTLS: true,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
-  connectionTimeout: 60000,
-  greetingTimeout: 30000,
-  socketTimeout: 60000,
 });
-
 await transporter.verify();
 console.log("SMTP connection established");
     // Send inquiry to company emails
