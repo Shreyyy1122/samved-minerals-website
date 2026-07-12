@@ -1,24 +1,14 @@
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const sendContact = async (req, res) => {
   try {
     const { name, email, phone, company, message } = req.body;
 
-   const transporter = nodemailer.createTransport({
-  host: "smtp.titan.email",
-  port: 587,
-  secure: false,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-  requireTLS: true,
-});
-await transporter.verify();
-console.log("SMTP connection established");
-    // Send inquiry to company emails
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
+    // Send inquiry to company
+    await resend.emails.send({
+      from: "onboarding@resend.dev",
       to: [
         "samvedgoa@gmail.com",
         "sachin@samvedminerals.com",
@@ -27,6 +17,7 @@ console.log("SMTP connection established");
       subject: "New Contact Form Inquiry",
       html: `
         <h3>New Inquiry Received</h3>
+
         <p><b>Name:</b> ${name}</p>
         <p><b>Email:</b> ${email}</p>
         <p><b>Phone:</b> ${phone}</p>
@@ -36,8 +27,8 @@ console.log("SMTP connection established");
     });
 
     // Send confirmation email to customer
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
+    await resend.emails.send({
+      from: "onboarding@resend.dev",
       to: email,
       subject: "Thank you for contacting SAMVED MINERALS",
       html: `
@@ -54,7 +45,7 @@ console.log("SMTP connection established");
         </p>
 
         <p>
-          Regards,<br>
+          Regards,<br/>
           <strong>SAMVED MINERALS</strong>
         </p>
       `,
@@ -64,7 +55,6 @@ console.log("SMTP connection established");
       success: true,
       message: "Inquiry sent successfully",
     });
-
   } catch (err) {
     console.error(err);
 
