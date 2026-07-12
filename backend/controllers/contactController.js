@@ -28,7 +28,7 @@ export const sendContact = async (req, res) => {
 
     // Send confirmation email to customer
     await resend.emails.send({
-      from: "onboarding@resend.dev",
+      from: "SAMVED MINERALS <sammed@samvedminerals.com>",
       to: email,
       subject: "Thank you for contacting SAMVED MINERALS",
       html: `
