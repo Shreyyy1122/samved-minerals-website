@@ -1,5 +1,6 @@
 import Layout from "../components/layout/Layout";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import {
   FaShip,
   FaGlobeAsia,
@@ -518,19 +519,19 @@ function Exports() {
 
     <div className="mt-12 flex flex-wrap justify-center gap-5">
 
-      <a
-        href="/contact#inquiry-form"
-        className="rounded-full bg-white px-10 py-4 text-lg font-bold text-slate-900 transition hover:scale-105"
-      >
-        Contact Us
-      </a>
+      <Link
+       to="/contact#inquiry-form"
+  className="rounded-full bg-white px-10 py-4 text-lg font-bold text-slate-900 transition hover:scale-105"
+>
+  Contact Us
+</Link>
 
-      <a
-        href="/products"
+      <Link
+        to="/products"
         className="rounded-full border-2 border-white px-10 py-4 text-lg font-bold text-white transition hover:bg-white hover:text-slate-900"
       >
         View Products
-      </a>
+      </Link>
 
     </div>
 
