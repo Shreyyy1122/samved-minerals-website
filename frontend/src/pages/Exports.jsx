@@ -502,41 +502,41 @@ function Exports() {
 
       {/* ================= CTA ================= */}
 
-      <section className="bg-gradient-to-r from-yellow-500 to-yellow-600 py-24">
+<section className="bg-gradient-to-r from-yellow-500 to-yellow-600 py-24">
 
-        <div className="mx-auto max-w-5xl px-6 text-center">
+  <div className="mx-auto max-w-5xl px-6 text-center">
 
-          <h2 className="text-5xl font-black text-white">
-            Ready To Import Premium Bauxite?
-          </h2>
+    <h2 className="text-5xl font-black text-white">
+      Ready To Import Premium Bauxite?
+    </h2>
 
-          <p className="mx-auto mt-8 max-w-3xl text-xl leading-8 text-yellow-100">
-            Partner with SAMVED MINERALS for dependable global supply,
-            premium quality, and professional export services tailored
-            to your industrial requirements.
-          </p>
+    <p className="mx-auto mt-8 max-w-3xl text-xl leading-8 text-yellow-100">
+      Partner with SAMVED MINERALS for dependable global supply,
+      premium quality, and professional export services tailored
+      to your industrial requirements.
+    </p>
 
-          <div className="mt-12 flex flex-wrap justify-center gap-5">
+    <div className="mt-12 flex flex-wrap justify-center gap-5">
 
-            <a
-              href="/contact"
-              className="rounded-full bg-white px-10 py-4 text-lg font-bold text-slate-900 transition hover:scale-105"
-            >
-              Contact Us
-            </a>
+      <a
+        href="/contact#inquiry-form"
+        className="rounded-full bg-white px-10 py-4 text-lg font-bold text-slate-900 transition hover:scale-105"
+      >
+        Contact Us
+      </a>
 
-            <a
-              href="/products"
-              className="rounded-full border-2 border-white px-10 py-4 text-lg font-bold text-white transition hover:bg-white hover:text-slate-900"
-            >
-              View Products
-            </a>
+      <a
+        href="/products"
+        className="rounded-full border-2 border-white px-10 py-4 text-lg font-bold text-white transition hover:bg-white hover:text-slate-900"
+      >
+        View Products
+      </a>
 
-          </div>
+    </div>
 
-        </div>
+  </div>
 
-      </section>
+</section>
 
     </Layout>
   );
