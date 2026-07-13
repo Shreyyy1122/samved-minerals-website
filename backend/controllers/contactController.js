@@ -6,61 +6,109 @@ export const sendContact = async (req, res) => {
   try {
     const { name, email, phone, company, message } = req.body;
 
+    // ==========================
     // Send inquiry to company
-    await resend.emails.send({
-      from: "onboarding@resend.dev",
+    // ==========================
+    const inquiryResult = await resend.emails.send({
+      from: "SAMVED MINERALS <sammed@samvedminerals.com>",
       to: [
         "samvedgoa@gmail.com",
         "sachin@samvedminerals.com",
         "sammed@samvedminerals.com",
       ],
-      subject: "New Contact Form Inquiry",
+      subject: `New Inquiry from ${name}`,
       html: `
-        <h3>New Inquiry Received</h3>
+        <div style="font-family: Arial, sans-serif; padding: 20px;">
+          <h2 style="color:#d4a017;">New Inquiry Received</h2>
 
-        <p><b>Name:</b> ${name}</p>
-        <p><b>Email:</b> ${email}</p>
-        <p><b>Phone:</b> ${phone}</p>
-        <p><b>Company:</b> ${company}</p>
-        <p><b>Message:</b> ${message}</p>
+          <table style="border-collapse: collapse; width: 100%;">
+            <tr>
+              <td style="padding:8px; border:1px solid #ddd;"><strong>Name</strong></td>
+              <td style="padding:8px; border:1px solid #ddd;">${name}</td>
+            </tr>
+
+            <tr>
+              <td style="padding:8px; border:1px solid #ddd;"><strong>Email</strong></td>
+              <td style="padding:8px; border:1px solid #ddd;">${email}</td>
+            </tr>
+
+            <tr>
+              <td style="padding:8px; border:1px solid #ddd;"><strong>Phone</strong></td>
+              <td style="padding:8px; border:1px solid #ddd;">${phone || "Not provided"}</td>
+            </tr>
+
+            <tr>
+              <td style="padding:8px; border:1px solid #ddd;"><strong>Company</strong></td>
+              <td style="padding:8px; border:1px solid #ddd;">${company || "Not provided"}</td>
+            </tr>
+
+            <tr>
+              <td style="padding:8px; border:1px solid #ddd;"><strong>Message</strong></td>
+              <td style="padding:8px; border:1px solid #ddd;">${message}</td>
+            </tr>
+          </table>
+
+          <br />
+
+          <p>
+            This inquiry was submitted through the
+            <strong>SAMVED MINERALS</strong> website.
+          </p>
+        </div>
       `,
     });
 
-    // Send confirmation email to customer
-    await resend.emails.send({
+    console.log("Company Inquiry Email:", inquiryResult);
+
+    // ==========================
+    // Send confirmation to customer
+    // ==========================
+    const customerResult = await resend.emails.send({
       from: "SAMVED MINERALS <sammed@samvedminerals.com>",
       to: email,
       subject: "Thank you for contacting SAMVED MINERALS",
       html: `
-        <h2>Thank You for Contacting SAMVED MINERALS</h2>
+        <div style="font-family: Arial, sans-serif; padding: 20px;">
+          <h2 style="color:#d4a017;">
+            Thank You for Contacting SAMVED MINERALS
+          </h2>
 
-        <p>Dear ${name},</p>
+          <p>Dear ${name},</p>
 
-        <p>
-          We have received your inquiry successfully.
-        </p>
+          <p>
+            Thank you for contacting us regarding your requirements.
+            We have successfully received your inquiry and our team
+            will review it shortly.
+          </p>
 
-        <p>
-          Our team will review your request and contact you shortly.
-        </p>
+          <p>
+            One of our representatives will get back to you as soon as possible.
+          </p>
 
-        <p>
-          Regards,<br/>
-          <strong>SAMVED MINERALS</strong>
-        </p>
+          <br/>
+
+          <p>
+            Regards,<br/>
+            <strong>SAMVED MINERALS</strong><br/>
+            Pune, Maharashtra, India
+          </p>
+        </div>
       `,
     });
 
-    res.json({
+    console.log("Customer Confirmation Email:", customerResult);
+
+    return res.status(200).json({
       success: true,
       message: "Inquiry sent successfully",
     });
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error("Contact Form Error:", error);
 
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "Failed to send inquiry",
+      error: error.message,
     });
   }
 };
