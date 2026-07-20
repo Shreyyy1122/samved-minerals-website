@@ -7,6 +7,17 @@ import heroImage from "../assets/images/hero.jpg";
 function Hero() {
   const navigate = useNavigate();
 
+  const handleProductsClick = () => {
+    const productsSection = document.getElementById("products");
+
+    if (productsSection) {
+      productsSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
+
   return (
     <section
       className="relative flex min-h-screen items-center justify-center overflow-hidden"
@@ -38,14 +49,9 @@ function Hero() {
           className="mt-6 text-5xl font-black leading-tight md:text-7xl lg:text-8xl"
         >
           <span className="text-white">SAM</span>
-
           <span className="text-yellow-500">VED</span>
-
           <br />
-
-          <span className="text-white">
-            MINERALS
-          </span>
+          <span className="text-white">MINERALS</span>
         </motion.h1>
 
         <motion.p
@@ -65,15 +71,15 @@ function Hero() {
           transition={{ delay: 0.6 }}
           className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row"
         >
-          {/* Explore Products Button */}
+          {/* Explore Products */}
           <button
-            onClick={() => navigate("/products")}
+            onClick={handleProductsClick}
             className="rounded-full bg-yellow-500 px-8 py-4 font-semibold text-white transition duration-300 hover:bg-yellow-600 hover:scale-105"
           >
             Explore Products
           </button>
 
-          {/* Contact Button */}
+          {/* Contact */}
           <button
             onClick={() => navigate("/contact")}
             className="flex items-center gap-3 rounded-full border border-white px-8 py-4 font-semibold text-white transition duration-300 hover:bg-white hover:text-slate-900 hover:scale-105"
@@ -98,7 +104,6 @@ function Hero() {
           <div className="mt-2 h-3 w-1 rounded-full bg-white"></div>
         </div>
       </motion.div>
-
     </section>
   );
 }

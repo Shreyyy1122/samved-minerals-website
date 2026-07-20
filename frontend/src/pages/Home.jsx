@@ -6,11 +6,16 @@ import WhyChooseUs from "../sections/WhyChooseUs";
 import Stats from "../sections/Stats";
 import MiningProcess from "../sections/MiningProcess";
 import ProductsHighlight from "../sections/ProductsHighlight";
+
 function Home() {
   return (
     <Layout>
       <Hero />
-      <ProductsHighlight />
+
+      <section id="products">
+        <ProductsHighlight />
+      </section>
+
       <About />
       <WhyChooseUs />
       <Stats />
