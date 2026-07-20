@@ -172,30 +172,7 @@ function Gallery() {
 
       {/* ================= CTA ================= */}
 
-      <section className="bg-white py-24">
-        <div className="mx-auto max-w-5xl px-6 text-center">
-          <p className="uppercase tracking-[5px] text-yellow-500">
-            Let's Work Together
-          </p>
-
-          <h2 className="mt-5 text-5xl font-black text-slate-900">
-            Looking for a Trusted Mineral Supplier?
-          </h2>
-
-          <p className="mx-auto mt-8 max-w-3xl text-lg text-gray-600">
-            SAMVED MINERALS supplies premium-grade bauxite with
-            dependable logistics, consistent quality and reliable
-            export services across international markets.
-          </p>
-
-          <Link
-            to="/contact#inquiry-form"
-            className="mt-10 inline-block rounded-full bg-yellow-500 px-10 py-4 text-lg font-bold text-white transition duration-300 hover:bg-yellow-600 hover:scale-105"
-          >
-            Contact Us
-          </Link>
-        </div>
-      </section>
+      
     </Layout>
   );
 }
