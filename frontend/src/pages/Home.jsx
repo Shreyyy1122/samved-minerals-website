@@ -12,6 +12,7 @@ function Home() {
     <Layout>
       <Hero />
 
+      {/* Products Section */}
       <section id="products">
         <ProductsHighlight />
       </section>

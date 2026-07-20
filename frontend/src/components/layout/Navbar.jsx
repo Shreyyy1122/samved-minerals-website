@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { HiMenu, HiX } from "react-icons/hi";
 
 function Navbar() {
@@ -7,6 +7,7 @@ function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,12 +19,43 @@ function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const scrollToProducts = () => {
+    setMobileOpen(false);
+
+    if (location.pathname !== "/") {
+      navigate("/");
+
+      setTimeout(() => {
+        const section = document.getElementById("products");
+
+        if (section) {
+          section.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+      }, 250);
+    } else {
+      const section = document.getElementById("products");
+
+      if (section) {
+        section.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    }
+  };
+
   const navLinks = [
     {
       name: "Home",
       path: "/",
     },
-    
+    {
+      name: "Products",
+      action: scrollToProducts,
+    },
     {
       name: "Exports",
       path: "/exports",
@@ -48,13 +80,11 @@ function Navbar() {
     >
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
         {/* Logo */}
-
         <Link to="/" className="flex flex-col">
           <span className="text-3xl font-black tracking-widest">
             <span className={scrolled ? "text-slate-900" : "text-white"}>
               SAM
             </span>
-
             <span className="text-yellow-500">VED</span>
           </span>
 
@@ -64,27 +94,39 @@ function Navbar() {
         </Link>
 
         {/* Desktop Menu */}
-
         <nav className="hidden items-center gap-8 lg:flex">
-          {navLinks.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              className={`font-medium transition ${
-                location.pathname === item.path
-                  ? "text-yellow-500"
-                  : scrolled
-                  ? "text-slate-700 hover:text-yellow-500"
-                  : "text-white hover:text-yellow-400"
-              }`}
-            >
-              {item.name}
-            </Link>
-          ))}
+          {navLinks.map((item) =>
+            item.action ? (
+              <button
+                key={item.name}
+                onClick={item.action}
+                className={`font-medium transition ${
+                  scrolled
+                    ? "text-slate-700 hover:text-yellow-500"
+                    : "text-white hover:text-yellow-400"
+                }`}
+              >
+                {item.name}
+              </button>
+            ) : (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={`font-medium transition ${
+                  location.pathname === item.path
+                    ? "text-yellow-500"
+                    : scrolled
+                    ? "text-slate-700 hover:text-yellow-500"
+                    : "text-white hover:text-yellow-400"
+                }`}
+              >
+                {item.name}
+              </Link>
+            )
+          )}
         </nav>
 
         {/* Quote Button */}
-
         <Link
           to="/contact"
           className="hidden rounded-full bg-yellow-500 px-6 py-3 font-semibold text-white transition hover:bg-yellow-600 lg:block"
@@ -92,8 +134,7 @@ function Navbar() {
           Get Quote
         </Link>
 
-        {/* Mobile Button */}
-
+        {/* Mobile Menu Button */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
           className={`text-3xl lg:hidden ${
@@ -105,23 +146,33 @@ function Navbar() {
       </div>
 
       {/* Mobile Menu */}
-
       {mobileOpen && (
         <div className="border-t bg-white shadow-xl lg:hidden">
           <div className="flex flex-col px-6 py-5">
-            {navLinks.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                onClick={() => setMobileOpen(false)}
-                className="border-b py-4 text-slate-700 transition hover:text-yellow-500"
-              >
-                {item.name}
-              </Link>
-            ))}
+            {navLinks.map((item) =>
+              item.action ? (
+                <button
+                  key={item.name}
+                  onClick={item.action}
+                  className="border-b py-4 text-left text-slate-700 transition hover:text-yellow-500"
+                >
+                  {item.name}
+                </button>
+              ) : (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  onClick={() => setMobileOpen(false)}
+                  className="border-b py-4 text-slate-700 transition hover:text-yellow-500"
+                >
+                  {item.name}
+                </Link>
+              )
+            )}
 
             <Link
               to="/contact"
+              onClick={() => setMobileOpen(false)}
               className="mt-5 rounded-xl bg-yellow-500 py-3 text-center font-semibold text-white"
             >
               Get Quote

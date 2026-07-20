@@ -528,12 +528,12 @@ function Exports() {
   Contact Us
 </Link>
 
-      <Link
-        to="/products"
-        className="rounded-full border-2 border-white px-10 py-4 text-lg font-bold text-white transition hover:bg-white hover:text-slate-900"
-      >
-        View Products
-      </Link>
+      <a
+  href="/#products"
+  className="rounded-full border-2 border-white px-10 py-4 text-lg font-bold text-white transition hover:bg-white hover:text-slate-900"
+>
+  View Products
+</a>
 
     </div>
 
